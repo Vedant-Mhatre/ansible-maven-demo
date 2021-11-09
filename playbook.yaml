@@ -6,12 +6,12 @@
    - name: Creating ec2 instance
      ec2:
        region: ap-south-1
-       key_name: sonarqube
-       instance_type: t2.micro
+       key_name: MasterJenkins
+       instance_type: t3a.micro
        image: ami-04bde106886a53080
        wait: yes
        wait_timeout: 500
        count: 1
        monitoring: no
-       vpc_subnet_id: subnet-099c5c4757d183892
+       vpc_subnet_id: subnet-0b2cb040de9eb9403
        assign_public_ip: yes
