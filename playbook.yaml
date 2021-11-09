@@ -16,3 +16,16 @@
         monitoring: no
         vpc_subnet_id: subnet-019d14a13c07a30c5
         assign_public_ip: yes
+
+    - name: install java
+      become: true
+      apt:
+        update_cache: yes
+    
+    - name: Install OpenJDK Java
+      become: yes
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        openjdk-8-jdk
