@@ -1,0 +1,17 @@
+---
+- name: Create Ec2 instances
+  hosts: localhost
+  gather_facts: false
+  tasks:
+   - name: Creating ec2 instance
+     ec2:
+       region: ap-south-1
+       key_name: sonarqube
+       instance_type: t2.micro
+       image: ami-04bde106886a53080
+       wait: yes
+       wait_timeout: 500
+       count: 1
+       monitoring: no
+       vpc_subnet_id: subnet-099c5c4757d183892
+       assign_public_ip: yes
