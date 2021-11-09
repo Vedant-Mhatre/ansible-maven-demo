@@ -6,7 +6,7 @@
    - name: Creating ec2 instance
      ec2:
        region: ap-south-1
-       key_name: sonarqube
+       key_name: Task
        instance_type: t3a.micro
        image: ami-04bde106886a53080
        wait: yes
