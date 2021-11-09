@@ -17,15 +17,18 @@
         vpc_subnet_id: subnet-019d14a13c07a30c5
         assign_public_ip: yes
 
-    - name: install java
+    - name: Update and upgrade apt packages
       become: true
       apt:
+        upgrade: yes
         update_cache: yes
+        cache_valid_time: 86400 #One day
     
-    - name: Install OpenJDK Java
+    - name: Install Java using Ansible
       become: yes
       apt:
-        name: "{{ item }}"
+        name: "{{ packages }}"
         state: present
-      with_items:
-        default-jre
+      vars:
+        packages:
+           - openjdk-11-jdk
