@@ -1,6 +1,6 @@
 ---
-- name: Create Ec2 instances
-  hosts: localhost
+- hosts: 127.0.0.1   
+  connection: local
   gather_facts: false
   tasks:
    - name: Creating ec2 instance
