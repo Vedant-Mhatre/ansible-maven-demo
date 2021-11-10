@@ -14,7 +14,7 @@ This is a demo project where a sample maven web app is built and deployed using 
 4. Install [Java](https://linoxide.com/install-java-ubuntu-20-04/) and [Maven](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-20-04/)
 
 
-5. Fork this repo and configure [ansible playbook](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/playbook.yaml) and replace subnet id, key name according to your configuration. Upload your key_name.pem file slave instance in '/home/ubuntu' directory and create file named 'ansible.cfg' inside /etc/ansible/ directory and paste following config in that file:
+5. Fork this repo and configure [ansible playbook](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/playbook.yaml) i.e: replace subnet id, key name according to your configuration. Upload your key_name.pem file on slave instance in '/home/ubuntu' directory. Create/update file named 'ansible.cfg' inside /etc/ansible/ directory and according to following config:
 ```
 [defaults]
 host_key_checking = False
@@ -59,7 +59,11 @@ pipeline{
 }
 ```
 
-7. When pipeline is executed, Jenkins will pull code from this repo, build and compile web app code to create a jar file inside 'target' directory and Sonarqube will test web app code present in this repo and if successfull Ansible Playbook invoked will then create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080. 
+7. When pipeline is executed:
+a. Jenkins will pull code from this repo.
+b. Build and compile web app code to create a jar file inside 'target' directory.
+c. Sonarqube will test web app code present in this repo
+d. Ansible Playbook invoked will then create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080. 
 
 ## To Do:
 
