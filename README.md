@@ -11,18 +11,10 @@ This is a demo project where a sample maven web app is built and deployed using 
 
 3. Integrate Sonarqube and Jenkins - [Reference](https://www.tatvasoft.com/blog/integrate-sonarqube-with-jenkins/)
 
-4. SSH into slave instance, clone this repo and cd into it:
-```bash
-git clone https://github.com/Vedant-Mhatre/ansible-maven-demo.git
-```
-```
-cd ansible-maven-demo
-```
-
-5. Install [Java](https://linoxide.com/install-java-ubuntu-20-04/) and [Maven](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-20-04/)
+4. Install [Java](https://linoxide.com/install-java-ubuntu-20-04/) and [Maven](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-20-04/)
 
 
-6. On Jenkins of master node, create a new pipeline project and use this pipeline script:
+5. On Jenkins of master node, create a new pipeline project and use this pipeline script:
 ```
 pipeline{
     agent any
@@ -58,10 +50,10 @@ pipeline{
 }
 ```
 
-7. When pipeline is executed, Sonarqube will test web app code present in this repo and if successfull will proceed ahead to next step.
+6. When pipeline is executed, Sonarqube will test web app code present in this repo and if successfull will proceed ahead to next step.
 
 
-8. Configure [ansible playbook](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/playbook.yaml) and replace subnet id, key name with your configuration. Upload your key_name.pem file slave instance in '/home/ubuntu' directory and create file named 'ansible.cfg' inside /etc/ansible/ directory and paste following config in that file:
+7. Configure [ansible playbook](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/playbook.yaml) and replace subnet id, key name with your configuration. Upload your key_name.pem file slave instance in '/home/ubuntu' directory and create file named 'ansible.cfg' inside /etc/ansible/ directory and paste following config in that file:
 ```
 [defaults]
 host_key_checking = False
@@ -71,7 +63,7 @@ private_key_file = /home/ubuntu/your_key_name.pem
 ```
 
 
-9. Ansible Playbook invoked by jenkins pipeline will create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080. 
+8. Ansible Playbook invoked by jenkins pipeline will create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080. 
 
 ## To Do:
 
