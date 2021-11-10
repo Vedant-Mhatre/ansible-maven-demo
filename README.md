@@ -19,7 +19,7 @@ git clone https://github.com/Vedant-Mhatre/ansible-maven-demo.git
 cd ansible-maven-demo
 ```
 
-5. Install [Java](https://linoxide.com/install-java-ubuntu-20-04/) and Maven(https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-20-04/)
+5. Install [Java](https://linoxide.com/install-java-ubuntu-20-04/) and [Maven](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-20-04/)
 
 6. Build and compile code:
 ```
