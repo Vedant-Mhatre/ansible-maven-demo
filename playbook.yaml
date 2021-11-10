@@ -30,6 +30,10 @@
           port: 22 
           state: started
       with_items: '{{ ec2.instances }}'
+    
+    - name: Copy the jar file from slave instance to new instance
+      copy: src=/home/ubuntu/ansible-maven-demo/target/myapp-1.0.jar dest=/home/ubuntu/
+      when: "{{ inventory_hostname == item.public_ip }}"
 
 
   - name: Configure instance
@@ -50,3 +54,9 @@
         vars:
           packages:
             - openjdk-11-jdk
+      
+      
+      
+      # - name: Deploy java 
+      #   java:
+      #     shell: java -jar
