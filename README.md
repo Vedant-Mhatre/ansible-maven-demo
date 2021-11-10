@@ -14,14 +14,23 @@ This is a demo project where a sample maven web app is built and deployed using 
 4. Install [Java](https://linoxide.com/install-java-ubuntu-20-04/) and [Maven](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-20-04/)
 
 
-5. On Jenkins of master node, create a new pipeline project and use this pipeline script:
+5. Fork this repo and configure [ansible playbook](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/playbook.yaml) and replace subnet id, key name according to your configuration. Upload your key_name.pem file slave instance in '/home/ubuntu' directory and create file named 'ansible.cfg' inside /etc/ansible/ directory and paste following config in that file:
+```
+[defaults]
+host_key_checking = False
+remote_user = ubuntu
+ask_pass = False
+private_key_file = /home/ubuntu/your_key_name.pem
+```
+
+6. On Jenkins of master node, create a new pipeline project and use this pipeline script:
 ```
 pipeline{
     agent any
     stages{
         stage('SCM Checkout'){
             steps{
-               git branch: 'main', url: 'https://github.com/Vedant-Mhatre/ansible-maven-demo.git'
+               git branch: 'main', url: 'https://github.com/Vedant-Mhatre/ansible-maven-demo.git' {replace my git url with your repo's url}
             }
         }
         stage('Build and compile code'){
@@ -50,20 +59,7 @@ pipeline{
 }
 ```
 
-6. When pipeline is executed, Sonarqube will test web app code present in this repo and if successfull will proceed ahead to next step.
-
-
-7. Configure [ansible playbook](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/playbook.yaml) and replace subnet id, key name with your configuration. Upload your key_name.pem file slave instance in '/home/ubuntu' directory and create file named 'ansible.cfg' inside /etc/ansible/ directory and paste following config in that file:
-```
-[defaults]
-host_key_checking = False
-remote_user = ubuntu
-ask_pass = False
-private_key_file = /home/ubuntu/your_key_name.pem
-```
-
-
-8. Ansible Playbook invoked by jenkins pipeline will create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080. 
+7. When pipeline is executed, Jenkins will pull code from this repo, build and compile web app code to create a jar file inside 'target' directory and Sonarqube will test web app code present in this repo and if successfull Ansible Playbook invoked will then create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080. 
 
 ## To Do:
 
