@@ -16,19 +16,39 @@
         monitoring: no
         vpc_subnet_id: subnet-019d14a13c07a30c5
         assign_public_ip: yes
+      register: ec2
 
-    - name: Update and upgrade apt packages
-      become: true
-      apt:
-        upgrade: yes
-        update_cache: yes
-        cache_valid_time: 86400 #One day
+    - name: Add new instance to host group
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: launched
+      with_items: "{{ ec2.instances }}"
+
+    - name: Wait for SSH to come up
+      wait_for:
+        host: "{{ item.public_dns_name }}"
+        port: 22
+        delay: 60
+        timeout: 320
+        state: started
+      with_items: "{{ ec2.instances }}"
+
+
+  - name: Configure instance
+    hosts: launched
+    become: True
+    gather_facts: false
+    tasks:
+      - name: Update and upgrade apt packages
+        apt:
+          upgrade: yes
+          update_cache: yes
+          cache_valid_time: 86400 #One day
     
-    - name: Install Java using Ansible
-      become: yes
-      apt:
-        name: "{{ packages }}"
-        state: present
-      vars:
-        packages:
-           - openjdk-11-jdk
+      - name: Install Java using Ansible
+        apt:
+          name: "{{ packages }}"
+          state: present
+        vars:
+          packages:
+            - openjdk-11-jdk
