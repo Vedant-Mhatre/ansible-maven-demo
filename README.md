@@ -37,13 +37,7 @@ pipeline{
                git branch: 'main', url: 'https://github.com/Vedant-Mhatre/ansible-maven-demo.git'
             }
         }
-        stage('Execting Ansible'){
-            steps{
-                sh 'ansible-playbook playbook.yaml'
-               
-            }
-            
-        }
+        
         stage('SonarQube analysis') {
             steps{
                 withSonarQubeEnv('SonarQube') {
@@ -51,13 +45,32 @@ pipeline{
                 }
              }
         }
+
+        stage('Execting Ansible'){
+            steps{
+                sh 'ansible-playbook playbook.yaml'
+               
+            }
+            
+        }
+        
     }
 }
 ```
 
-8. Sonarqube will test web app code present in this repo.
+8. Configure ansible playbook and replace subnet id, key name with your configuration and create file named 'ansible.cfg' inside /etc/ansible/ directory and paste following config in that file:
+```
+[defaults]
+host_key_checking = False
+remote_user = ubuntu
+ask_pass = False
+private_key_file = /home/ubuntu/your_key_name.pem
+```
 
-9. Ansible Playbook invoked by jenkins pipeline will create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080.
+9. When pipeline is executed, Sonarqube will test web app code present in this repo and if successfull will proceed ahead to next step.
+
+
+10. Ansible Playbook invoked by jenkins pipeline will create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080. 
 
 ## To Do:
 
