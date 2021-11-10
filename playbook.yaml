@@ -60,4 +60,4 @@
             - openjdk-11-jdk
 
       - name: Deploy java 
-        shell: java -jar myapp-1.0.jar
+        shell: nohup java -jar myapp-1.0.jar &
