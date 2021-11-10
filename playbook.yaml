@@ -44,17 +44,14 @@
           src: /home/ubuntu/ansible-maven-demo/target/myapp-1.0.jar
           dest: /home/ubuntu/
 
-      # - name: Copy the jar file from slave instance to new instance
-      #   copy: src=/home/ubuntu/ansible-maven-demo/target/myapp-1.0.jar dest=/home/ubuntu/
-      #   when: "{{ inventory_hostname == 'localhost' }}"
 
-      - name: Update and upgrade apt packages
+      - name: Update apt packages
         apt:
           upgrade: yes
           update_cache: yes
           cache_valid_time: 86400 #One day
     
-      - name: Install Java using Ansible
+      - name: Installing jdk 11
         apt:
           name: "{{ packages }}"
           state: present
@@ -62,8 +59,6 @@
           packages:
             - openjdk-11-jdk
       
-      
-      
-      # - name: Deploy java 
-      #   java:
-      #     shell: java -jar
+      - name: Deploy java 
+        java:
+          shell: java -jar myapp-1.0.jar
