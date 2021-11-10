@@ -17,11 +17,13 @@ This is a demo project where a sample maven web app is built and deployed using 
 
 5. In your forked git repo:
 
-Replace sonarqube credentials and git repo url in [pom.xml file](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/pom.xml) with your credentials and git repo url.
+ - Replace sonarqube credentials and git repo url in [pom.xml file](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/pom.xml) with your credentials and git repo url.
 
-Replace subnet id, key name in [ansible playbook](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/playbook.yaml) according to your configuration.
+ - Replace subnet id, key name in [ansible playbook](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/playbook.yaml) according to your configuration.
 
-Upload your key_name.pem file on slave instance in '/home/ubuntu' directory. Create/update file named 'ansible.cfg' inside /etc/ansible/ directory and according to following config:
+ - Upload your key_name.pem file on slave instance in '/home/ubuntu' directory.
+ 
+  - Create/update file named 'ansible.cfg' inside /etc/ansible/ directory according to following config:
 ```
 [defaults]
 host_key_checking = False
@@ -68,10 +70,10 @@ pipeline{
 
 7. When pipeline is executed:
 
-..1. Jenkins will pull code from this repo.
+ -  Jenkins will pull code from this repo.
 
-..2. Build and compile web app code to create a jar file inside 'target' directory.
+ -  Build and compile web app code to create a jar file inside 'target' directory.
 
-..3. Sonarqube will test web app code present in this repo
+ -  Sonarqube will test web app code present in this repo
 
-..4. Ansible Playbook invoked will then create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080. 
+ -  Ansible Playbook invoked will then create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080. 
