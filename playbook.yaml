@@ -41,7 +41,7 @@
       - name: Copy the jar file from slave instance to new instance
         become: true 
         copy:
-          src: /home/ubuntu/ansible-maven-demo/target/myapp-1.0.jar
+          src: ./target/myapp-1.0.jar
           dest: /home/ubuntu/
 
 
