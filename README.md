@@ -60,11 +60,11 @@ pipeline{
 ```
 
 7. When pipeline is executed:
+
 a. Jenkins will pull code from this repo.
+
 b. Build and compile web app code to create a jar file inside 'target' directory.
+
 c. Sonarqube will test web app code present in this repo
+
 d. Ansible Playbook invoked will then create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080. 
-
-## To Do:
-
-- [x] Automate building and compiling part of sample web app in pipeline script
