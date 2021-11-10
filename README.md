@@ -58,3 +58,7 @@ pipeline{
 8. Sonarqube will test web app code present in this repo.
 
 9. Ansible Playbook invoked by jenkins pipeline will create new instance, copy jar file to new instance, install java and deploy the sample web app on port 8080.
+
+## To Do:
+
+- [ ] Automate building and compiling part of sample web app in pipeline script
