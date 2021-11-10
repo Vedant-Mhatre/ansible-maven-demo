@@ -47,12 +47,12 @@
 
       - name: Update apt packages
         apt:
-          #upgrade: yes
           update_cache: yes
           cache_valid_time: 86400 #One day
     
       - name: Installing jdk 11
         apt:
+          update_cache: yes
           name: "{{ packages }}"
           state: present
         vars:
