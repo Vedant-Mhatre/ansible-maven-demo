@@ -39,8 +39,14 @@
     gather_facts: false
     tasks:
       - name: Copy the jar file from slave instance to new instance
-        copy: src=/home/ubuntu/ansible-maven-demo/target/myapp-1.0.jar dest=/home/ubuntu/
-        when: "{{ inventory_hostname == 'localhost' }}"
+        become: true 
+        copy:
+          src: /home/ubuntu/ansible-maven-demo/target/myapp-1.0.jar
+          dest: /home/ubuntu/
+
+      # - name: Copy the jar file from slave instance to new instance
+      #   copy: src=/home/ubuntu/ansible-maven-demo/target/myapp-1.0.jar dest=/home/ubuntu/
+      #   when: "{{ inventory_hostname == 'localhost' }}"
 
       - name: Update and upgrade apt packages
         apt:
