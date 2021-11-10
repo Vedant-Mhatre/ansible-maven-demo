@@ -57,7 +57,7 @@
           state: present
         vars:
           packages:
-            - openjdk-11-jdk
+            - openjdk-11-jdk-headless
 
       - name: Deploy java 
         shell: nohup java -jar myapp-1.0.jar &
