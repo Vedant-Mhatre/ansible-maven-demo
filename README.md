@@ -61,7 +61,7 @@ pipeline{
 7. When pipeline is executed, Sonarqube will test web app code present in this repo and if successfull will proceed ahead to next step.
 
 
-8. Configure ansible playbook and replace subnet id, key name with your configuration and create file named 'ansible.cfg' inside /etc/ansible/ directory and paste following config in that file:
+8. Configure [ansible playbook](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/playbook.yaml) and replace subnet id, key name with your configuration. Upload your key_name.pem file slave instance in '/home/ubuntu' directory and create file named 'ansible.cfg' inside /etc/ansible/ directory and paste following config in that file:
 ```
 [defaults]
 host_key_checking = False
