@@ -1,7 +1,7 @@
-# Jenkins Ansible Maven Sonarqube Demo
+# Jenkins Terraform Ansible Maven Sonarqube Demo
 
 ## About
-This is a demo project where a sample maven web app is built and deployed using tools like Jenkins, ansible and sonarqube
+This is a demo project where a sample maven web app is built and deployed using tools like Jenkins, Terraform, Ansible and Sonarqube.
 
 ## Steps:
 
@@ -13,15 +13,15 @@ This is a demo project where a sample maven web app is built and deployed using 
 
 4. Fork this repo and make these changes in your git repo:
 
- - Replace sonarqube credentials and git repo url in [pom.xml file](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/pom.xml) with your credentials and git repo url.
+   - Replace sonarqube credentials and git repo url in [pom.xml file](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/main/pom.xml) with your credentials and git repo url.
 
- - Replace subnet id, security group and key name in [terraform script](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/terraform/main.tf) according to your configuration.
+   - Replace subnet id, security group and key name in [terraform script](https://github.com/Vedant-Mhatre/ansible-maven-demo/blob/terraform/main.tf) according to your configuration.
 
 5. On slave instance:
 
- - Upload your key_name.pem file in '/home/ubuntu' directory.
+   - Upload your key_name.pem file in '/home/ubuntu' directory.
  
- - Create/update file named 'ansible.cfg' inside /etc/ansible/ directory according to following config:
+   - Create/update file named 'ansible.cfg' inside /etc/ansible/ directory according to following config:
 ```
 [defaults]
 host_key_checking = False
@@ -56,15 +56,12 @@ pipeline{
             steps{
                 sh 'terraform init'
                 sh 'terraform apply -auto-approve'
-               
             }
         }
         stage('Execting Ansible Playbook'){
             steps{
                 sh 'ansible-playbook playbook.yaml'
-               
             }
-            
         }
     }
 }
@@ -72,12 +69,12 @@ pipeline{
 
 7. When pipeline is executed:
 
- -  Jenkins will pull code from the specified git repo.
+   -  Jenkins will pull code from the specified git repo.
 
- -  Build and compile web app code to create a jar file inside 'target' directory.
+   -  Build and compile web app code to create a jar file inside 'target' directory.
 
- -  Sonarqube will test web app code present in this repo.
+   -  Sonarqube will test web app code present in this repo.
  
- -  Terraform will create new instance and store it's details in a yaml file for ansible.
+   -  Terraform will create new instance and store it's details in a yaml file for ansible.
 
- -  Ansible Playbook will copy jar file to new instance, install java and deploy the sample web app on port 8080. 
+   -  Ansible Playbook will copy jar file to new instance, install java and deploy the sample web app on port 8080. 
