@@ -3,13 +3,15 @@
   - name: Add new instance to host group
     vars_files:
       - ../tf_ansible_vars_file.yml
-    add_host:
-      hostname: "{tf_public_ip}"
-      groupname: launched
+    tasks:
+      - name: Adding host
+        add_host:
+          hostname: "{{tf_public_ip}}"
+          groupname: launched
 
   - name: Wait for SSH to come up
     wait_for:
-        host: "{tf_public_dns_name}"
+        host: "{{tf_public_dns_name}}"
         port: 22 
         state: started
 
