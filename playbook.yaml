@@ -1,6 +1,7 @@
 ---
 
   - name: Add new instance to host group
+    hosts: localhost
     vars_files:
       - ./tf_ansible_vars_file.yml
     tasks:
