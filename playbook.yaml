@@ -2,7 +2,7 @@
 
   - name: Add new instance to host group
     vars_files:
-      - ../tf_ansible_vars_file.yml
+      - ./tf_ansible_vars_file.yml
     tasks:
       - name: Adding host
         add_host:
