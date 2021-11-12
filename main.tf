@@ -7,7 +7,7 @@ resource "aws_instance" "public-web-ec2" {
   instance_type               = "t3a.micro"
   availability_zone           = "ap-south-1a"
   key_name                    = "Task"
-  subnet_id                   = aws_subnet.subnet-1.id
+  subnet_id                   = "subnet-019d14a13c07a30c5"
   vpc_security_group_ids      = "sg-0730e1c4f2a1c04fd"
   associate_public_ip_address = true
 
